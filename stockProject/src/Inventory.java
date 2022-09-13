@@ -1,45 +1,64 @@
+import java.util.ArrayList;
+import java.util.List;
 public class Inventory {
-    Product product = new Product();
+    private List<Product> productList;
+    public Inventory() {
+        this.productList = new ArrayList<>();
+    };
 
     /**
      * @return true if success to add product else return false
      */
-    public boolean addProductInIventory (String productName, String brandName, Double unitPrice, Integer amountToAdd) {
+    public boolean setProductInInvetory (String productName, String brandName, Double unitPrice, Integer amountToAdd, String codeProduct) {
+        Product product = new Product();
         // if has validate value return true
         if (amountToAdd > 0 || productName != null || unitPrice > 0.0)  {
             product.productName = productName;
             product.brandName = brandName;
             product.unitPrice = unitPrice;
             product.amountInInventory = amountToAdd;
-            product.codeProduct = "b2fe6582-e6d2-4c97-abb7-d036f6557eb4";
+            product.codeProduct = codeProduct;
 
+            this.productList.add(product);
+            System.out.println("Produto adicionado!");
             return true;
         }
 
         // otherwise return false
+        System.out.println("Erro ao adicionar o produto!");
         return false;
     }
 
+    /**
+     * @return true if success to sale product else return false
+     */
     public boolean saleProduct (String codeProduct, Integer amountToSale) {
-        Double saleValue = 0.0;
-        if (codeProduct == product.codeProduct) {
-            product.amountInInventory -= amountToSale;
-            
-            for (Integer obj = amountToSale; obj > 0; obj--) {
-                saleValue = product.unitPrice + product.unitPrice;
+        for (Product product : this.productList) {
+            Double saleValue = 0.0;
+            // has code product
+            if (codeProduct.equals(product.codeProduct)) {
+                if (product.amountInInventory >= amountToSale) {
+
+                    product.amountInInventory -= amountToSale;
+                    saleValue = product.unitPrice * amountToSale;
+                    System.out.println("Total: R$" + saleValue);
+                    return true;
+                } else {
+                    System.out.println("Quantidade insuficiente!");
+                    return false;
+                } 
+            } else {
+                System.out.println("Produto NÃO Encontrado!");
             }
-            System.out.println("Total: R$" + saleValue);
-        
-            return true;
         }
 
         return false;
     }
 
-    /**
-     * @return all that exist in inventary
-     */
-    public String listInventory() {
-        return "Name: " + product.productName + "\nBrand: " + product.brandName + "\nPrice: R$" + product.unitPrice + "\nAmount: " + product.amountInInventory + "\nCod: " + product.codeProduct;
+    public void getInvetory() {
+        for (Product obj : this.productList) {
+            System.out.println("Name: " + obj.productName + "\nBrand: " + obj.brandName + "\nPrice: R$" + obj.unitPrice + "\nAmount: " + obj.amountInInventory + "\nCod: " + obj.codeProduct);
+            System.out.println("\n=====================================================================================================================================================================");
+        }
     }
 }
