@@ -1,22 +1,17 @@
 import java.util.List;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 import java.util.ArrayList;
 
 public class App {
     protected List<Inventory> inventaryProduct = new ArrayList<>();
     public static void main(String[] args) throws Exception {
         Inventory invetory = new Inventory();
-        App ge = new App();
+        System.out.println("=================================Estoque==========================================");
+        invetory.addProductInIventory("PC", "HP", 4000.00, 2);
+        System.out.println(invetory.listInventory());
+        System.out.println("=================================Venda============================================");
+        invetory.saleProduct("b2fe6582-e6d2-4c97-abb7-d036f6557eb4", 1);
 
-        invetory.addProductInIventory("PC", "HP", 4.000, 2.00);
-
-        ge.inventaryProduct.add(invetory);
-
-        for (Inventory obj : ge.inventaryProduct) {
-            obj.listAllProductsInInventory();
-        }
+        System.out.println("=================================Estoque Atualizado===============================");
+        System.out.println(invetory.listInventory());
     }
 }
