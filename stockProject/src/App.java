@@ -1,8 +1,5 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class App {
-    protected List<Inventory> inventaryProduct = new ArrayList<>();
+
     public static void main(String[] args) throws Exception {
         Inventory invetory = new Inventory();
         System.out.println("=================================Estoque==========================================");
